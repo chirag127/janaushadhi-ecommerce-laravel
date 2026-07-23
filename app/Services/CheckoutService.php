@@ -39,6 +39,9 @@ class CheckoutService
 
         // Re-validate stock at purchase time.
         foreach ($items as $item) {
+            if (! $item->product->price || (float) $item->product->price <= 0) {
+                throw new RuntimeException("{$item->product->name} is available on request only — please contact us to order it.");
+            }
             if ((int) $item->product->stock < $item->quantity) {
                 throw new RuntimeException("Insufficient stock for {$item->product->name}.");
             }

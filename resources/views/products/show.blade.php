@@ -40,11 +40,16 @@
                 @endif
             </div>
 
+            @php($onRequest = ! $product->price || (float) $product->price <= 0)
             <div class="mt-4 flex items-baseline gap-3">
-                <span class="text-3xl font-bold text-brand-700">₹{{ number_format((float) $product->price, 2) }}</span>
-                @if ($product->discountPercent() > 0)
-                    <span class="text-lg text-gray-400 line-through">₹{{ number_format((float) $product->mrp, 2) }}</span>
-                    <span class="text-sm font-semibold text-accent-600">Save ₹{{ number_format((float) $product->mrp - (float) $product->price, 2) }}</span>
+                @if ($onRequest)
+                    <span class="text-2xl font-bold text-brand-700">Available on request</span>
+                @else
+                    <span class="text-3xl font-bold text-brand-700">₹{{ number_format((float) $product->price, 2) }}</span>
+                    @if ($product->discountPercent() > 0)
+                        <span class="text-lg text-gray-400 line-through">₹{{ number_format((float) $product->mrp, 2) }}</span>
+                        <span class="text-sm font-semibold text-accent-600">Save ₹{{ number_format((float) $product->mrp - (float) $product->price, 2) }}</span>
+                    @endif
                 @endif
             </div>
 
@@ -60,9 +65,13 @@
             </div>
 
             <div class="mt-6 flex items-center gap-3">
-                <div class="flex-1">
-                    @livewire('add-to-cart-button', ['product' => $product], key('show-atc-'.$product->id))
-                </div>
+                @if ($onRequest)
+                    <a href="{{ route('contact') }}?product={{ urlencode($product->name) }}" class="btn-primary flex-1 text-center">Request this medicine</a>
+                @else
+                    <div class="flex-1">
+                        @livewire('add-to-cart-button', ['product' => $product], key('show-atc-'.$product->id))
+                    </div>
+                @endif
                 <div class="relative">
                     @livewire('wishlist-toggle', ['product' => $product], key('show-wl-'.$product->id))
                 </div>

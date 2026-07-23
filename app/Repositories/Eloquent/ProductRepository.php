@@ -71,6 +71,10 @@ class ProductRepository implements ProductRepositoryInterface
             $query->where('stock', '>', 0);
         }
 
+        if (! empty($filters['exclude_on_request'])) {
+            $query->where('price', '>', 0);
+        }
+
         if (! empty($filters['featured'])) {
             $query->where('is_featured', true);
         }

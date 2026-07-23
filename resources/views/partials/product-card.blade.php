@@ -16,14 +16,23 @@
         @if ($product->unit_size)
             <p class="mb-2 text-xs text-gray-400">{{ $product->unit_size }}</p>
         @endif
+        @php($onRequest = ! $product->price || (float) $product->price <= 0)
         <div class="mt-auto flex items-baseline gap-1.5">
-            <span class="text-base font-bold text-brand-700">₹{{ number_format((float) $product->price, 2) }}</span>
-            @if ($product->discountPercent() > 0)
-                <span class="text-xs text-gray-400 line-through">₹{{ number_format((float) $product->mrp, 2) }}</span>
+            @if ($onRequest)
+                <span class="text-sm font-semibold text-brand-700">Available on request</span>
+            @else
+                <span class="text-base font-bold text-brand-700">₹{{ number_format((float) $product->price, 2) }}</span>
+                @if ($product->discountPercent() > 0)
+                    <span class="text-xs text-gray-400 line-through">₹{{ number_format((float) $product->mrp, 2) }}</span>
+                @endif
             @endif
         </div>
         <div class="mt-3">
-            @livewire('add-to-cart-button', ['product' => $product], key('home-atc-'.$product->id))
+            @if ($onRequest)
+                <a href="{{ route('contact') }}?product={{ urlencode($product->name) }}" class="block w-full rounded-md border border-brand-600 px-3 py-1.5 text-center text-xs font-medium text-brand-700 hover:bg-brand-50">Request this medicine</a>
+            @else
+                @livewire('add-to-cart-button', ['product' => $product], key('home-atc-'.$product->id))
+            @endif
         </div>
     </div>
 </article>

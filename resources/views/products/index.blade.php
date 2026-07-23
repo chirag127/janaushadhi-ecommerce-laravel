@@ -52,6 +52,11 @@
                     <span class="text-sm text-gray-700 dark:text-gray-200">In stock only</span>
                 </label>
 
+                <label class="flex items-center gap-2">
+                    <input type="checkbox" name="exclude_on_request" value="1" @checked(! empty($filters['exclude_on_request'])) class="rounded text-brand-600 focus:ring-brand-500" />
+                    <span class="text-sm text-gray-700 dark:text-gray-200">Exclude "on request" items</span>
+                </label>
+
                 <div class="flex gap-2">
                     <button type="submit" class="btn-primary flex-1 text-sm">Apply</button>
                     <a href="{{ route('products.index') }}" class="btn-secondary text-sm">Clear</a>

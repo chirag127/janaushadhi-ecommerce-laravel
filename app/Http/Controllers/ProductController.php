@@ -21,7 +21,7 @@ class ProductController extends Controller
 
     public function index(Request $request): View
     {
-        $filters = $request->only(['search', 'category', 'min_price', 'max_price', 'in_stock', 'sort']);
+        $filters = $request->only(['search', 'category', 'min_price', 'max_price', 'in_stock', 'exclude_on_request', 'sort']);
 
         $perPage = (int) config('store.products_per_page', 24);
         $products = $this->products->paginateFiltered($filters, $perPage)->withQueryString();

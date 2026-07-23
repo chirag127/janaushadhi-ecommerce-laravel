@@ -10,7 +10,7 @@ use Laravel\Socialite\Facades\Socialite;
 
 class SocialLoginController extends Controller
 {
-    private const PROVIDERS = ['google', 'github', 'microsoft', 'facebook'];
+    private const PROVIDERS = ['google', 'github'];
 
     public function redirect(string $provider): RedirectResponse
     {

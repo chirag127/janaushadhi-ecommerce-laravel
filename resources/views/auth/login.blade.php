@@ -15,8 +15,6 @@
         <div class="mt-6 grid grid-cols-2 gap-2">
             <a href="{{ route('social.redirect', 'google') }}" class="btn-secondary">Google</a>
             <a href="{{ route('social.redirect', 'github') }}" class="btn-secondary">GitHub</a>
-            <a href="{{ route('social.redirect', 'microsoft') }}" class="btn-secondary">Microsoft</a>
-            <a href="{{ route('social.redirect', 'facebook') }}" class="btn-secondary">Facebook</a>
         </div>
         <div class="mt-6 flex items-center gap-3">
             <span class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></span>

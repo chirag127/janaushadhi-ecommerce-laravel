@@ -16,10 +16,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
-    // Razorpay (India). Placeholder test keys in .env.example. COD works
-    // without keys; online payment is only offered when a key_id is present.
     'razorpay' => [
-        'key' => env('RAZORPAY_KEY_ID'),
-        'secret' => env('RAZORPAY_KEY_SECRET'),
+        'key_id' => env('RAZORPAY_KEY_ID'),
+        'key_secret' => env('RAZORPAY_KEY_SECRET'),
+        'webhook_secret' => env('RAZORPAY_WEBHOOK_SECRET'),
+        'test_mode' => env('RAZORPAY_TEST_MODE', true),
     ],
 ];

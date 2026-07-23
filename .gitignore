@@ -37,3 +37,10 @@ yarn-error.log
 .roo
 .trae
 .windsurf
+
+# local dev artifacts
+/database/database.sqlite
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/logs/*

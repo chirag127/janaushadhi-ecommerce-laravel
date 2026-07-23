@@ -18,8 +18,13 @@ class Product extends Model
 {
     use HasUuids;
 
-    protected $connection = 'pgsql';
     protected $table = 'products';
+
+    /** Shared catalog lives on pgsql (InsForge) in prod; sqlite for offline dev. */
+    public function getConnectionName(): ?string
+    {
+        return config('database.shared', 'pgsql');
+    }
 
     // Shared table manages its own created_at/updated_at; let Eloquent use them.
     public $timestamps = true;

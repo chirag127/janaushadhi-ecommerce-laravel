@@ -5,6 +5,10 @@ use Illuminate\Support\Str;
 return [
     'default' => env('DB_CONNECTION', 'pgsql'),
 
+    // Connection for the SHARED catalog (products/categories). pgsql->InsForge in
+    // prod; set SHARED_DB_CONNECTION=sqlite for offline local dev.
+    'shared' => env('SHARED_DB_CONNECTION', 'pgsql'),
+
     'connections' => [
         'sqlite' => [
             'driver' => 'sqlite',

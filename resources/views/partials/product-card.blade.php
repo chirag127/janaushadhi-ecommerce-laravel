@@ -1,33 +1,29 @@
-{{-- Reusable product card. Expects $product (App\Models\Product). --}}
-@php $symbol = config('store.currency_symbol'); @endphp
-<article class="group flex flex-col overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm transition hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
-    <a href="{{ route('products.show', $product->slug) }}" wire:navigate class="relative block overflow-hidden">
-        <img src="{{ $product->imageOrPlaceholder() }}" alt="{{ $product->name }}" class="aspect-square w-full object-cover transition group-hover:scale-105" loading="lazy" />
-        @if ($product->discountPercent() > 0)
-            <span class="absolute left-2 top-2 rounded-full bg-accent-500 px-2 py-0.5 text-xs font-bold text-white">{{ $product->discountPercent() }}% OFF</span>
-        @endif
-        @unless ($product->inStock())
-            <span class="absolute right-2 top-2 rounded-full bg-gray-800/80 px-2 py-0.5 text-xs font-semibold text-white">Out of stock</span>
-        @endunless
+<article class="group relative flex flex-col rounded-xl border border-gray-100 bg-white shadow-sm transition-shadow hover:shadow-md dark:border-gray-700 dark:bg-gray-800">
+    <div class="absolute right-2 top-2 z-10">
+        @livewire('wishlist-toggle', ['product' => $product], key('home-wl-'.$product->id))
+    </div>
+
+    <a href="{{ route('products.show', $product->slug) }}" wire:navigate class="block overflow-hidden rounded-t-xl">
+        <img src="{{ $product->imageOrPlaceholder() }}" alt="{{ $product->name }}" loading="lazy" class="h-44 w-full object-cover transition-transform duration-300 group-hover:scale-105" />
     </a>
-    <div class="flex flex-1 flex-col p-4">
-        @if ($product->category)
-            <a href="{{ route('categories.show', $product->category->slug) }}" wire:navigate class="text-xs font-medium text-brand-600 hover:underline">{{ $product->category->name }}</a>
-        @endif
-        <h3 class="mt-1 line-clamp-2 text-sm font-semibold text-gray-900 dark:text-white">
-            <a href="{{ route('products.show', $product->slug) }}" wire:navigate>{{ $product->name }}</a>
-        </h3>
+
+    @if ($product->discountPercent() > 0)
+        <span class="absolute left-2 top-2 rounded bg-accent-500 px-1.5 py-0.5 text-xs font-bold text-white">{{ $product->discountPercent() }}% OFF</span>
+    @endif
+
+    <div class="flex flex-1 flex-col p-3">
+        <a href="{{ route('products.show', $product->slug) }}" wire:navigate class="mb-1 line-clamp-2 text-sm font-medium leading-snug text-gray-800 hover:text-brand-700 dark:text-gray-100">{{ $product->name }}</a>
         @if ($product->unit_size)
-            <p class="mt-0.5 text-xs text-gray-500 dark:text-gray-400">{{ $product->unit_size }}</p>
+            <p class="mb-2 text-xs text-gray-400">{{ $product->unit_size }}</p>
         @endif
-        <div class="mt-2 flex items-baseline gap-2">
-            <span class="text-lg font-bold text-gray-900 dark:text-white">{{ $symbol }}{{ number_format((float) $product->price, 2) }}</span>
+        <div class="mt-auto flex items-baseline gap-1.5">
+            <span class="text-base font-bold text-brand-700">₹{{ number_format((float) $product->price, 2) }}</span>
             @if ($product->discountPercent() > 0)
-                <span class="text-sm text-gray-400 line-through">{{ $symbol }}{{ number_format((float) $product->mrp, 2) }}</span>
+                <span class="text-xs text-gray-400 line-through">₹{{ number_format((float) $product->mrp, 2) }}</span>
             @endif
         </div>
         <div class="mt-3">
-            @livewire('add-to-cart-button', ['product' => $product], key('atc-'.$product->id))
+            @livewire('add-to-cart-button', ['product' => $product], key('home-atc-'.$product->id))
         </div>
     </div>
 </article>

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Shopping Cart')
+@section('title', 'Cart')
 
 @section('content')
     @livewire('cart-manager')

@@ -17,8 +17,13 @@ class Category extends Model
 {
     use HasUuids;
 
-    protected $connection = 'pgsql';
     protected $table = 'categories';
+
+    /** Shared catalog lives on pgsql (InsForge) in prod; sqlite for offline dev. */
+    public function getConnectionName(): ?string
+    {
+        return config('database.shared', 'pgsql');
+    }
 
     // Shared table has created_at but NO updated_at -> disable Eloquent timestamps.
     public $timestamps = false;

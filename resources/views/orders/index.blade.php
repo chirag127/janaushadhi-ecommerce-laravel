@@ -3,32 +3,34 @@
 @section('title', 'My Orders')
 
 @section('content')
-@php $symbol = config('store.currency_symbol'); @endphp
-<div class="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
-    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">My orders</h1>
+<div class="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
+    <h1 class="mb-6 text-2xl font-bold text-gray-900 dark:text-white">My Orders</h1>
 
-    <div class="mt-6 space-y-4">
-        @forelse ($orders as $order)
-            <a href="{{ route('orders.show', $order) }}" wire:navigate class="block rounded-xl border border-gray-100 bg-white p-5 shadow-sm transition hover:shadow-md dark:border-gray-800 dark:bg-gray-900">
-                <div class="flex flex-wrap items-center justify-between gap-3">
-                    <div>
-                        <p class="font-mono text-sm font-medium text-gray-900 dark:text-white">{{ $order->order_number }}</p>
-                        <p class="text-xs text-gray-500 dark:text-gray-400">{{ optional($order->created_at)->format('d M Y') }} · {{ $order->items_count ?? $order->items->count() }} {{ Str::plural('item', $order->items_count ?? $order->items->count()) }}</p>
-                    </div>
-                    <div class="flex items-center gap-4">
-                        <span class="rounded-full px-2.5 py-0.5 text-xs font-medium {{ $order->statusColor() }}">{{ ucfirst($order->status) }}</span>
-                        <span class="text-base font-bold text-gray-900 dark:text-white">{{ $symbol }}{{ number_format((float) $order->total, 2) }}</span>
+    @if ($orders->isEmpty())
+        <div class="rounded-xl border-2 border-dashed border-gray-200 py-20 text-center dark:border-gray-700">
+            <p class="text-lg font-medium text-gray-700 dark:text-gray-200">No orders yet</p>
+            <p class="mt-1 text-sm text-gray-500">When you place an order, it will show up here.</p>
+            <a href="{{ route('products.index') }}" wire:navigate class="btn-primary mt-4 text-sm">Start Shopping</a>
+        </div>
+    @else
+        <div class="space-y-4">
+            @foreach ($orders as $order)
+                <div class="rounded-xl border border-gray-100 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+                    <div class="flex flex-wrap items-center justify-between gap-3">
+                        <div>
+                            <p class="text-sm font-semibold text-gray-900 dark:text-white">#{{ $order->order_number }}</p>
+                            <p class="text-xs text-gray-400">Placed {{ ($order->placed_at ?? $order->created_at)?->format('d M Y') }}</p>
+                        </div>
+                        <span class="badge {{ $order->statusColor() }}">{{ ucfirst($order->status) }}</span>
+                        <div class="text-right">
+                            <p class="text-sm font-bold text-gray-900 dark:text-white">₹{{ number_format((float) $order->total, 2) }}</p>
+                            <a href="{{ route('orders.show', $order->id) }}" wire:navigate class="text-xs font-medium text-brand-700 hover:underline">View details</a>
+                        </div>
                     </div>
                 </div>
-            </a>
-        @empty
-            <div class="rounded-xl border border-dashed border-gray-300 bg-white p-12 text-center dark:border-gray-700 dark:bg-gray-900">
-                <p class="text-gray-500 dark:text-gray-400">You haven't placed any orders yet.</p>
-                <a href="{{ route('products.index') }}" wire:navigate class="btn-primary mt-4 inline-block">Browse products</a>
-            </div>
-        @endforelse
-    </div>
-
-    <div class="mt-8">{{ $orders->links() }}</div>
+            @endforeach
+        </div>
+        <div class="mt-8">{{ $orders->links() }}</div>
+    @endif
 </div>
 @endsection

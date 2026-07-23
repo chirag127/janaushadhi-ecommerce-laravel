@@ -12,6 +12,18 @@
             <p class="mt-4 rounded-lg bg-brand-50 px-3 py-2 text-sm text-brand-700">{{ session('status') }}</p>
         @endif
 
+        <div class="mt-6 grid grid-cols-2 gap-2">
+            <a href="{{ route('social.redirect', 'google') }}" class="btn-secondary">Google</a>
+            <a href="{{ route('social.redirect', 'github') }}" class="btn-secondary">GitHub</a>
+            <a href="{{ route('social.redirect', 'microsoft') }}" class="btn-secondary">Microsoft</a>
+            <a href="{{ route('social.redirect', 'facebook') }}" class="btn-secondary">Facebook</a>
+        </div>
+        <div class="mt-6 flex items-center gap-3">
+            <span class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></span>
+            <span class="text-xs uppercase tracking-wide text-gray-400">or</span>
+            <span class="h-px flex-1 bg-gray-200 dark:bg-gray-700"></span>
+        </div>
+
         <form method="POST" action="{{ route('login') }}" class="mt-6 space-y-4">
             @csrf
             <div>

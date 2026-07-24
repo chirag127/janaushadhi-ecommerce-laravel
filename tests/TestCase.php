@@ -16,5 +16,8 @@ abstract class TestCase extends BaseTestCase
         // Ensure the shared-catalog connection also uses in-memory SQLite during tests.
         // phpunit.xml sets SHARED_DB_CONNECTION=sqlite; this wires the config key.
         config(['database.shared' => 'sqlite']);
+
+        // Disable Vite asset bundler in tests (no build/ manifest in CI).
+        $this->withoutVite();
     }
 }

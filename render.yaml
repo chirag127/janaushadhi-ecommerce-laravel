@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: janaushadhi-laravel
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    region: ohio
+    branch: main
+    healthCheckPath: /
+    envVars:
+      - key: APP_KEY
+        generateValue: false   # set once: `php artisan key:generate --show`
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DATABASE_URL
+        sync: false            # paste the Neon POOLED connection string in Render dashboard
+      - key: SHARED_DB_CONNECTION
+        value: pgsql
+      - key: RAZORPAY_KEY_ID
+        sync: false            # test key
+      - key: RAZORPAY_KEY_SECRET
+        sync: false
+      - key: SESSION_DRIVER
+        value: database
+      - key: CACHE_STORE
+        value: database

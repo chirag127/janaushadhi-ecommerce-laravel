@@ -33,6 +33,12 @@ jobs:
       - name: Install dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader --no-scripts
 
+      - name: Prepare storage + cache dirs
+        run: |
+          mkdir -p bootstrap/cache
+          mkdir -p storage/framework/{cache,sessions,views} storage/logs
+          chmod -R 777 storage bootstrap/cache
+
       - name: Generate app key
         run: php artisan key:generate
 

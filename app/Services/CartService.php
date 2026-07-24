@@ -90,7 +90,7 @@ class CartService
         $taxable = max(0, $subtotal - $discount);
 
         $threshold = (float) config('store.free_shipping_threshold');
-        $shipping = ($subtotal <= 0 || $subtotal >= $threshold) ? 0.0 : (float) config('store.shipping_fee');
+        $shipping = ($taxable <= 0 || $subtotal >= $threshold) ? 0.0 : (float) config('store.shipping_fee');
 
         $tax = round($taxable * ((float) config('store.tax_rate') / 100), 2);
         $total = round($taxable + $shipping + $tax, 2);

@@ -108,6 +108,6 @@ class Product extends Model
 
     public function imageOrPlaceholder(): string
     {
-        return $this->image_url ?: asset('images/placeholder-product.svg');
+        return $this->image_url ?: '/images/placeholder-product.svg';
     }
 }

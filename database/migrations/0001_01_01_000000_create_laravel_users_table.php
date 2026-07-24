@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 /**
  * Laravel-local users table. Kept separate (laravel_ prefix) from the shared
- * InsForge public schema so it never collides with the JS apps' auth.users.
+ * Neon public schema so it never collides with the JS apps' auth.users.
  */
 return new class extends Migration
 {

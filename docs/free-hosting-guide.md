@@ -46,8 +46,7 @@ A real Linux VPS (2 AMD vCPU, ~12 GB RAM), never sleeps, no card charged.
    Neon over TLS works from Oracle (no firewall). Use the POOLED connection string.
 5. **Migrate + seed:** `php artisan migrate --force` then seed the 2,439-product
    catalog (coordinate UUIDs with sibling apps — seed the shared catalog ONCE).
-6. **Razorpay:** test keys in `.env` (RAZORPAY_KEY_ID/SECRET — already native in
-   this app, no InsForge tie).
+6. **Razorpay:** test keys in `.env` (RAZORPAY_KEY_ID/SECRET — Razorpay is native in this app).
 7. **Serve:** nginx + php-fpm (or `php artisan serve` behind a reverse proxy).
    Point `janaushadhi.oriz.in` (Cloudflare) at the Oracle instance IP; free SSL.
 8. **Keep-alive:** Oracle reclaims idle Always-Free instances — run a light cron

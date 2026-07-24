@@ -51,7 +51,7 @@ class DatabaseSeeder extends Seeder
         );
 
         // Catalog (products/categories) — only seed locally on sqlite; in prod
-        // the shared InsForge Postgres already holds 2439 products / 60 categories.
+        // the shared Neon Postgres already holds 2439 products / 60 categories.
         if (config('database.shared') !== 'sqlite') {
             $this->command->info('Shared catalog is remote (pgsql); skipping local catalog seed.');
             return;

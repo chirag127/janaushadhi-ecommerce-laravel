@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * Maps to the SHARED public.products table (2439 rows, owned by the InsForge
- * multi-app project). Laravel READS this catalog; admin product management
+ * Maps to the SHARED public.products table (2439 rows, owned by the Neon
+ * shared janaushadhi project). Laravel READS this catalog; admin product management
  * may also write name/price/stock/is_active. We do NOT recreate this table.
  *
  * Columns: id(uuid) drug_code name slug description category_id(uuid)
@@ -20,7 +20,7 @@ class Product extends Model
 
     protected $table = 'products';
 
-    /** Shared catalog lives on pgsql (InsForge) in prod; sqlite for offline dev. */
+    /** Shared catalog lives on pgsql (Neon) in prod; sqlite for offline dev. */
     public function getConnectionName(): ?string
     {
         return config('database.shared', 'pgsql');

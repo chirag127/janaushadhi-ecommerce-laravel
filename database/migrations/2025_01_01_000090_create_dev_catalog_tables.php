@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 /**
  * DEV-ONLY: create local `categories` + `products` catalog tables for offline
- * SQLite development. In production these live in the shared InsForge Postgres
+ * SQLite development. In production these live in the shared Neon Postgres
  * (owned by the sibling storefronts) and are NEVER created by Laravel — so this
  * migration is guarded to run ONLY when the shared connection is sqlite.
  */

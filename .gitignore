@@ -23,7 +23,7 @@ yarn-error.log
 /.vscode
 /.zed
 
-# InsForge & AI agent skills
+# AI agent skills / backend metadata
 .insforge
 .agent
 .agents
@@ -44,3 +44,4 @@ yarn-error.log
 /storage/framework/sessions/*
 /storage/framework/views/*
 /storage/logs/*
+.neon

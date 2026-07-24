@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Schema;
  * public.categories catalog (already seeded, 2439 products / 60 categories),
  * but WRITE cart, wishlist, addresses, orders, order items, reviews and
  * coupons into our own laravel_-prefixed tables to avoid RLS/ownership
- * conflicts with the shared multi-app InsForge schema.
+ * conflicts with the shared multi-app Neon schema.
  *
  * product_id / category_id reference public.products.id (uuid) but we do NOT
  * add cross-table FK constraints (the shared tables are owned by other apps);

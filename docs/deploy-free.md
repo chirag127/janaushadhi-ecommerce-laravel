@@ -1,7 +1,7 @@
 # Deploy the Jan Aushadhi Laravel app (free options)
 
-Laravel needs **PHP 8.2+ + a database**. In prod it uses Postgres (the shared
-InsForge Postgres). Free PHP+Postgres hosting is the hardest of the 4 apps —
+Laravel needs **PHP 8.2+ + a database**. In prod it uses Neon Postgres (shared
+janaushadhi project `sweet-silence-15535482`). Free PHP+Postgres hosting is the hardest of the 4 apps —
 here are the realistic free paths, honest about tradeoffs.
 
 ## The catch
@@ -12,11 +12,9 @@ this well are rare (most need a card or sleep aggressively).
 
 ### 1. Railway / Render (free tier, may need card)
 - Deploy the Laravel app as a web service; it runs `php artisan serve` or via
-  nixpacks. Connect to the InsForge Postgres (`DB_CONNECTION=pgsql`, host
-  `ht574p3t.us-east.database.insforge.app`) **IF that host's port 5432 is
-  reachable from the platform** (it was firewalled on the local corp network,
-  but a cloud host should reach it).
-- Set env: `APP_KEY` (`php artisan key:generate --show`), the `DB_*` vars, the
+  nixpacks. Connect to Neon Postgres via `DATABASE_URL` (set `DB_CONNECTION=pgsql`
+  and paste the pooled connection string from `neon connection-string`).
+- Set env: `APP_KEY` (`php artisan key:generate --show`), `DATABASE_URL`, the
   Razorpay + OAuth keys.
 - ⚠️ Free tiers now often require a card on file and sleep after inactivity.
 
@@ -27,7 +25,7 @@ this well are rare (most need a card or sleep aggressively).
 ### 3. InfinityFree / shared PHP host (free, no card) — MySQL only
 - Free shared PHP hosts give **MySQL, not Postgres**. To use one, switch
   `DB_CONNECTION=mysql` and point at their MySQL DB (the app's Eloquent code is
-  DB-agnostic; the shared `products`/`categories` from InsForge would need to be
+  DB-agnostic; the shared `products`/`categories` from Neon would need to be
   imported into that MySQL, or the app runs fully self-contained on MySQL with
   its own seeded catalog — the SQLite dev seeder pattern ports to MySQL).
 - No SSH → deploy via their file manager/FTP + run migrations via a bootstrap
@@ -41,7 +39,7 @@ this well are rare (most need a card or sleep aggressively).
 - **Free + public + no card**: hard for Laravel. The cleanest is a **cheap
   ~$3/mo shared host with Postgres or MySQL** if it must be public + reliable.
 - **Free + public, OK with a card on file (no charge if within limits)**:
-  Railway or Fly.io connecting to the InsForge Postgres.
+  Railway or Fly.io connecting to Neon Postgres.
 - **Free + no card**: run locally (SQLite), or InfinityFree with MySQL (effort).
 
 ## Env checklist (any host)
@@ -49,8 +47,8 @@ this well are rare (most need a card or sleep aggressively).
 APP_KEY=          # php artisan key:generate --show
 APP_ENV=production
 APP_URL=https://<your-domain>
-DB_CONNECTION=pgsql            # or mysql on a shared host
-DB_HOST=... DB_DATABASE=... DB_USERNAME=... DB_PASSWORD=...
+DB_CONNECTION=pgsql
+DATABASE_URL=postgresql://<user>:<password>@<host>/neondb?sslmode=require  # neon connection-string
 RAZORPAY_KEY_ID=... RAZORPAY_KEY_SECRET=...   # test keys
 GOOGLE_CLIENT_ID/SECRET, GITHUB_CLIENT_ID/SECRET   # social login
 ```

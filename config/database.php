@@ -5,7 +5,7 @@ use Illuminate\Support\Str;
 return [
     'default' => env('DB_CONNECTION', 'pgsql'),
 
-    // Connection for the SHARED catalog (products/categories). pgsql->InsForge in
+    // Connection for the SHARED catalog (products/categories). pgsql->Neon in
     // prod; set SHARED_DB_CONNECTION=sqlite for offline local dev.
     'shared' => env('SHARED_DB_CONNECTION', 'pgsql'),
 
@@ -20,10 +20,10 @@ return [
 
         'pgsql' => [
             'driver' => 'pgsql',
-            'url' => env('DB_URL'),
+            'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'insforge'),
+            'database' => env('DB_DATABASE', 'neondb'),
             'username' => env('DB_USERNAME', 'postgres'),
             'password' => env('DB_PASSWORD', ''),
             'charset' => env('DB_CHARSET', 'utf8'),

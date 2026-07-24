@@ -19,7 +19,7 @@ class Category extends Model
 
     protected $table = 'categories';
 
-    /** Shared catalog lives on pgsql (InsForge) in prod; sqlite for offline dev. */
+    /** Shared catalog lives on pgsql (Neon) in prod; sqlite for offline dev. */
     public function getConnectionName(): ?string
     {
         return config('database.shared', 'pgsql');

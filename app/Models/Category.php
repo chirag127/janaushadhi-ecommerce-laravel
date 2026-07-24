@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -15,7 +16,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Category extends Model
 {
-    use HasUuids;
+    use HasFactory, HasUuids;
 
     protected $table = 'categories';
 
@@ -66,7 +67,6 @@ class Category extends Model
 
     public function imageOrPlaceholder(): string
     {
-        return $this->image_url
-            ?: 'https://placehold.co/400x300/eefdf3/11924a?text='.urlencode(mb_substr($this->name, 0, 16));
+        return $this->image_url ?: asset('images/placeholder-product.svg');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -16,7 +17,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Product extends Model
 {
-    use HasUuids;
+    use HasFactory, HasUuids;
 
     protected $table = 'products';
 
@@ -107,7 +108,6 @@ class Product extends Model
 
     public function imageOrPlaceholder(): string
     {
-        return $this->image_url
-            ?: 'https://placehold.co/600x600/eefdf3/11924a?text='.urlencode(mb_substr($this->name, 0, 18));
+        return $this->image_url ?: asset('images/placeholder-product.svg');
     }
 }

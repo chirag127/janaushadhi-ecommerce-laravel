@@ -44,7 +44,7 @@ jobs:
 
       - name: Commit and push applied fixes
         if: steps.ml.outputs.has_updated_sources == 1
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: "ci: apply linters auto-fixes"
           commit_user_name: megalinter-bot

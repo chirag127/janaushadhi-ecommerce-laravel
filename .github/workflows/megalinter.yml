@@ -22,7 +22,6 @@ env:
 
 permissions:
   contents: write
-  workflows: write
   pull-requests: write
   statuses: write
 
@@ -42,6 +41,15 @@ jobs:
         uses: oxsecurity/megalinter@v8
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit and push applied fixes
+        if: steps.ml.outputs.has_updated_sources == 1
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "ci: apply linters auto-fixes"
+          commit_user_name: megalinter-bot
+          commit_user_email: megalinter-bot@users.noreply.github.com
+          file_pattern: "!.github/workflows/**"
 
       - name: Upload MegaLinter reports
         if: always()

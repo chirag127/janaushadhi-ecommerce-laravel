@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jan Aushadhi Ecommerce (Laravel) — self-hostable generic-medicine store</title>
+  <meta name="description" content="A self-hostable Laravel 12 + Livewire + Tailwind ecommerce storefront for affordable generic medicines. Razorpay + COD checkout, admin portal, Docker/Render deploy." />
+  <style>
+    :root {
+      --bg: #ffffff; --fg: #16181d; --muted: #626973; --surface: #f4f5f7;
+      --border: #d9dce1; --accent: #128a4a; --accent-fg: #ffffff;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg:#101216; --fg:#e8eaed; --muted:#99a0ab; --surface:#191c21; --border:#2a2e35; --accent:#3fc47e; --accent-fg:#101216; }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 system-ui, -apple-system, sans-serif; }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 3rem 1.25rem 5rem; }
+    header { margin-bottom: 2rem; }
+    h1 { font-size: 2rem; margin: 0 0 .25rem; }
+    .tag { color: var(--muted); font-size: 1.05rem; margin: 0 0 1.5rem; }
+    h2 { font-size: 1.15rem; margin: 2rem 0 .5rem; }
+    a { color: var(--accent); }
+    .btn { display: inline-block; background: var(--accent); color: var(--accent-fg); padding: .6rem 1.1rem; border-radius: .5rem; text-decoration: none; font-weight: 600; margin: .25rem .5rem .25rem 0; }
+    .btn.secondary { background: var(--surface); color: var(--fg); border: 1px solid var(--border); }
+    ul { padding-left: 1.25rem; }
+    pre { background: var(--surface); border: 1px solid var(--border); border-radius: .5rem; padding: 1rem; overflow-x: auto; font-size: .9rem; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    footer { margin-top: 3rem; color: var(--muted); font-size: .9rem; border-top: 1px solid var(--border); padding-top: 1rem; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Jan Aushadhi Ecommerce</h1>
+      <p class="tag">A self-hostable storefront for affordable generic medicines — Laravel 12, Livewire, Tailwind.</p>
+      <a class="btn" href="https://github.com/chirag127/janaushadhi-ecommerce-laravel">View on GitHub</a>
+      <a class="btn secondary" href="https://github.com/chirag127/janaushadhi-ecommerce-laravel#quick-start">Deploy it</a>
+    </header>
+
+    <h2>What it is</h2>
+    <p>A complete ecommerce platform for selling generic (unbranded) medicines — the kind sold under India's Jan Aushadhi scheme at a fraction of branded-drug prices. It gives a pharmacy a full online store: browsable catalog, cart, Razorpay + cash-on-delivery checkout, customer accounts, and an admin back office for products, inventory, orders, coupons, and reports.</p>
+    <p>It is a self-hostable application, not a hosted service. Clone it, point it at a PostgreSQL database, and run your own store.</p>
+
+    <h2>Features</h2>
+    <ul>
+      <li>Storefront: catalog, search, category filtering, product pages, reviews</li>
+      <li>Livewire cart &amp; wishlist with live counters</li>
+      <li>Checkout via Razorpay or cash-on-delivery, with coupons and configurable shipping</li>
+      <li>Customer accounts, saved addresses, order history, social login (Google/GitHub/Microsoft/Facebook)</li>
+      <li>Admin portal with RBAC: products, inventory, orders, coupons, customers, reports</li>
+    </ul>
+
+    <h2>Deploy</h2>
+    <pre><code>git clone https://github.com/chirag127/janaushadhi-ecommerce-laravel.git
+cd janaushadhi-ecommerce-laravel
+composer install &amp;&amp; npm install
+cp .env.example .env &amp;&amp; php artisan key:generate
+php artisan migrate --seed
+composer dev   # server + queue + vite</code></pre>
+    <p>Docker and Render blueprints are included — see the <a href="https://github.com/chirag127/janaushadhi-ecommerce-laravel#quick-start">README</a> and <code>docs/deploy-render.md</code>.</p>
+
+    <footer>
+      Part of the <a href="https://blog.oriz.in">oriz</a> family · MIT licensed · Chirag Singhal &lt;<a href="mailto:chirag@oriz.in">chirag@oriz.in</a>&gt;
+    </footer>
+  </div>
+</body>
+</html>
